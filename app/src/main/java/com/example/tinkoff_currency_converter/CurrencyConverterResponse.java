@@ -1,9 +1,6 @@
 package com.example.tinkoff_currency_converter;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class Response{
+public class CurrencyConverterResponse {
     private String Transaction;
     private double value;
 

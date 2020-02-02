@@ -9,7 +9,7 @@ public class GsonSingleton {
     public static Gson getInstance() {
         if (instance == null) {
             instance = new GsonBuilder()
-                    .registerTypeAdapter(Response.class, new Utils.MyAdapter())
+                    .registerTypeAdapter(CurrencyConverterResponse.class, new Utils.MyAdapter())
                     .create();
         }
         return instance;

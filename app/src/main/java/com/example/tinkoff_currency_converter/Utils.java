@@ -2,7 +2,6 @@ package com.example.tinkoff_currency_converter;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -15,7 +14,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,19 +41,20 @@ public class Utils {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static class MyAdapter implements JsonDeserializer<Response> {
+    //custom deserializer
+    public static class MyAdapter implements JsonDeserializer<CurrencyConverterResponse> {
 
         @Override
-        public Response deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            Response response = new Response();
+        public CurrencyConverterResponse deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            CurrencyConverterResponse currencyConverterResponse = new CurrencyConverterResponse();
 
             try {
                 if (json != null) {
                     JsonObject jsonObject = json.getAsJsonObject();
                     for (Map.Entry<String, JsonElement> elementEntry : jsonObject.entrySet()) {
-                        response.setTransaction(elementEntry.getKey());
-                        response.setValue(elementEntry.getValue().getAsDouble());
-                        return response;
+                        currencyConverterResponse.setTransaction(elementEntry.getKey());
+                        currencyConverterResponse.setValue(elementEntry.getValue().getAsDouble());
+                        return currencyConverterResponse;
                     }
                 }
                 return null;

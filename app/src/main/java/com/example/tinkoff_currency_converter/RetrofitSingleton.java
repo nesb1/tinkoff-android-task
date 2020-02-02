@@ -19,7 +19,7 @@ public class RetrofitSingleton {
             okhttpClientBuilder.readTimeout(4, TimeUnit.SECONDS);
             okhttpClientBuilder.addInterceptor(interceptor);
             instance = new Retrofit.Builder()
-                    .baseUrl("https://free.currconv.com/api/v7/")
+                    .baseUrl(ConverterApi.baseUrl)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(GsonSingleton.getInstance()))
                     .client(okhttpClientBuilder.build())
